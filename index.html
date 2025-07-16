@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taxi Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <h2>Taxi Calculator by Shellington</h2>
+
+    <label for="passengers">Number of Passengers:</label>
+    <input type="number" id="passengers" placeholder="Enter number of passengers" />
+
+    <label for="fare">Amount per Passenger (R):</label>
+    <input type="number" id="fare" placeholder="Enter amount per passenger" />
+
+    <label for="amountGiven">Amount Given by Passenger (R):</label>
+    <input type="number" id="amountGiven" placeholder="Enter amount received" />
+
+    <button onclick="calculateFare()">Calculate</button>
+    <button onclick="window.location.href='per-row.html'">Per Row (seat)</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

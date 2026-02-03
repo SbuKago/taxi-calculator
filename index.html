@@ -3,27 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Taxi Calculator</title>
+  <title>Taxi Fare Calculators</title>
   <link rel="stylesheet" href="style.css">
+  
+  <br>
 </head>
 <body>
-  <div class="calculator">
-    <h2>Taxi Calculator by Shellington</h2>
+<div>
+  <h1>Calculators</h1>
+  
+<br/>
+  <table>
+    <tr>
+      <!-- Column 1: Standard Taxi Calculator -->
+      <td>
+        <div class="calculator">
+          <h2>Standard Taxi Calculator</h2>
 
-    <label for="passengers">Number of Passengers:</label>
-    <input type="number" id="passengers" placeholder="Enter number of passengers" />
+          <label for="passengers">Number of Passengers:</label>
+          <input type="number" id="passengers" placeholder="Enter number of passengers" />
 
-    <label for="fare">Amount per Passenger (R):</label>
-    <input type="number" id="fare" placeholder="Enter amount per passenger" />
+          <label for="fare">Amount per Passenger (R):</label>
+          <input type="number" id="fare" placeholder="Enter amount per passenger" />
 
-    <label for="amountGiven">Amount Given by Passenger (R):</label>
-    <input type="number" id="amountGiven" placeholder="Enter amount received" />
+          <label for="amountGiven">Amount Given by Passengers (R):</label>
+          <input type="number" id="amountGiven" placeholder="Enter amount received" />
 
-    <button onclick="calculateFare()">Calculate</button>
-    <button onclick="window.location.href='per-row.html'">Per Row (seat)</button>
-    <div class="result" id="result"></div>
-  </div>
+          <button onclick="calculateFare()">Calculate</button>
 
-  <script src="script.js"></script>
+          <div class="result" id="result"></div>
+        </div>
+      </td>
+
+      <!-- Column 2: Per Seat Taxi Calculator -->
+      <td>
+        <div class="calculatorPs">
+          <h2>Per Seat Calculator</h2>
+
+          <label for="passengersPs">Number of Passengers (Per Row):</label>
+          <input type="number" id="passengersPs" placeholder="Enter number of passangers per sea/row">
+
+          <label for="farePs">Fare per Passenger (R):</label>
+          <input type="number" id="farePs" placeholder="Enter amount per passenger">
+
+          <label for="amountGivenPs">Total Amount Given (R):</label>
+          <input type="number" id="amountGivenPs" placeholder="Enter amount received">
+
+          <button onclick="calculateFarePs()">Calculate</button>
+
+          <div class="resultPs" id="resultPs"></div>
+          <div class="changePerSeatPs" id="changePerSeatPs"></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="text-align: center; margin-top: 30px;">
+  <button class="refresh" onclick="location.reload()" >
+    🔄 Refresh Page
+  </button>
+</div>
+
+
+  <script>
+    // Standard Taxi Fare Calculation
+    function calculateFare() {
+      const passengers = parseInt(document.getElementById("passengers").value);
+      const fare = parseFloat(document.getElementById("fare").value);
+      const amountGiven = parseFloat(document.getElementById("amountGiven").value);
+      const totalFare = passengers * fare;
+      const change = amountGiven - totalFare;
+
+      if (!isNaN(change)) {
+        document.getElementById("result").innerText = `Total Fare: R${totalFare.toFixed(2)}, Change: R${change.toFixed(2)}`;
+      } else {
+        document.getElementById("result").innerText = "Please enter valid numbers.";
+      }
+    }
+
+    // Per Seat Fare Calculation
+    function calculateFarePs() {
+      const passengers = parseInt(document.getElementById("passengersPs").value);
+      const fare = parseFloat(document.getElementById("farePs").value);
+      const amountGiven = parseFloat(document.getElementById("amountGivenPs").value);
+      const totalFare = passengers * fare;
+      const change = amountGiven - totalFare;
+      const changePerSeat = change / passengers;
+
+      if (!isNaN(changePerSeat)) {
+        document.getElementById("resultPs").innerText = `Total Fare: R${totalFare.toFixed(2)}, Change: R${change.toFixed(2)}`;
+        document.getElementById("changePerSeatPs").innerText = `Change per Seat: R${changePerSeat.toFixed(2)}`;
+      } else {
+        document.getElementById("resultPs").innerText = "Please enter valid numbers.";
+        document.getElementById("changePerSeatPs").innerText = "";
+      }
+    }
+  </script>
 </body>
 </html>
